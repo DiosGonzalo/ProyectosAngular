@@ -1,0 +1,39 @@
+<div class="card">
+  <form (submit)="$event.preventDefault()">
+    <label>
+      Nombre
+      <input type="text" [value]="perfil.nombre" (input)="perfil.nombre = $any($event.target).value" name="nombre" />
+    </label>
+    <div class="small">Caracteres: {{ (perfil.nombre || '').length }}</div>
+
+    <label>
+      Apellidos
+      <input type="text" [value]="perfil.apellidos" (input)="perfil.apellidos = $any($event.target).value" name="apellidos" />
+    </label>
+    <div class="small">Caracteres: {{ (perfil.apellidos || '').length }}</div>
+
+    <label>
+      Email
+      <input type="email" [value]="perfil.email" (input)="perfil.email = $any($event.target).value" name="email" />
+    </label>
+
+    <label>
+      Edad
+      <input type="number" [value]="perfil.edad" (input)="perfil.edad = $any($event.target).value === '' ? null : $any($event.target).valueAsNumber" name="edad" min="0" />
+    </label>
+
+    <div class="actions">
+      <button type="button" (click)="resetear()">Resetear</button>
+    </div>
+  </form>
+</div>
+
+<div class="preview">
+  <h4>Vista previa (en tiempo real)</h4>
+  <p [style.color]="perfil.edad === null ? 'black' : (perfil.edad > 18 ? 'green' : (perfil.edad < 18 ? 'red' : 'black'))">
+    <strong>Nombre:</strong> {{ perfil.nombre || '—' }}<br />
+    <strong>Apellidos:</strong> {{ perfil.apellidos || '—' }}<br />
+    <strong>Email:</strong> {{ perfil.email || '—' }}<br />
+    <strong>Edad:</strong> {{ perfil.edad !== null ? perfil.edad : '—' }}
+  </p>
+</div>
