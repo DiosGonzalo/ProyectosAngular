@@ -1,0 +1,39 @@
+<div class="task-list card">
+  <div class="card-body">
+    <h4 class="card-title mb-3">Lista de tareas</h4>
+
+    <div class="header d-flex fw-bold small text-muted mb-2">
+      <div style="width:40px">#</div>
+      <div class="flex-grow-1">Tarea</div>
+      <div style="width:120px; text-align:center">Estado</div>
+      <div style="width:110px; text-align:right">Acción</div>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item d-flex align-items-center" *ngFor="let task of tasks; let i = index">
+        <div style="width:40px">{{ i + 1 }}</div>
+
+        <div class="flex-grow-1 d-flex flex-column">
+          <div class="task-row d-flex align-items-center">
+            <input type="checkbox" class="me-2" [checked]="task.done" (change)="toggleDone(task)" aria-label="Marcar tarea" />
+            <span [class.done]="task.done" class="task-title">{{ task.title }}</span>
+          </div>
+          <small class="text-muted" *ngIf="!task.done">Por hacer</small>
+          <small class="text-success" *ngIf="task.done">Completada</small>
+        </div>
+
+        <div style="width:120px; text-align:center">
+          <span class="badge" [class.bg-success]="task.done" [class.bg-secondary]="!task.done">
+            {{ task.done ? 'Hecha' : 'Pendiente' }}
+          </span>
+        </div>
+
+        <div style="width:110px; text-align:right">
+          <button class="btn btn-sm btn-outline-primary" (click)="toggleDone(task)">
+            {{ task.done ? 'Desmarcar' : 'Marcar' }}
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
