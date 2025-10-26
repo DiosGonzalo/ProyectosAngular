@@ -1,0 +1,50 @@
+<div class="wrap">
+  <h3>Lista de alumnos</h3>
+
+  <table class="tabla-alumnos">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Alumno</th>
+        <th>Edad</th>
+        <th>Curso</th>
+        <th>Sexo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let alumno of alumnos; let i = index">
+        <td class="index">{{ i + 1 }}</td>
+
+        <td class="alumno-cell">
+          <div class="avatar">{{ iniciales(alumno) }}</div>
+          <div class="info">
+            <div class="nombre">{{ alumno.nombre }} <span class="apellidos">{{ alumno.apellidos }}</span></div>
+          </div>
+        </td>
+
+        <td>
+          <span class="edad-badge" [class.adult]="alumno.edad > 18" [class.minor]="alumno.edad < 18">
+            {{ alumno.edad }} años
+          </span>
+        </td>
+
+        <td>{{ alumno.curso }}</td>
+
+        <td class="sexo">
+          <span class="icon" [class.male]="alumno.sexo === 'male'" [class.female]="alumno.sexo === 'female'">
+            {{ alumno.sexo === 'male' ? '♂' : '♀' }}
+          </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn btn-edit" (click)="editar(i)" title="Editar">✏️</button>
+          <button class="btn btn-del" (click)="eliminar(i)" title="Eliminar">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="alumnos.length === 0" class="vacio">No hay alumnos.</div>
+</div>
